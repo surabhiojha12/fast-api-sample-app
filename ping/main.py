@@ -14,7 +14,7 @@ app = FastAPI()
 URL = "http://my_user_container:8000/health"
 
 @app.get("/")
-def root():
+async def root():
     return {"message": "Hello Monitor api"}
 
 @app.get("/ping")

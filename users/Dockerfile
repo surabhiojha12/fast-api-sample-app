@@ -5,6 +5,7 @@ WORKDIR /code
 COPY ./requirements.txt /code/requirements.txt
 
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+RUN pip install sqlalchemy
 
 COPY ./users /code/users
 
