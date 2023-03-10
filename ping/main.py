@@ -10,7 +10,8 @@ class Order(BaseModel):
 
 app = FastAPI()
 
-URL = "http://0.0.0.0:8000/health"
+# since both containers are part of same network
+URL = "http://my_user_container:8000/health"
 
 @app.get("/")
 def root():
@@ -18,6 +19,9 @@ def root():
 
 @app.get("/ping")
 async def ping_users():
-    async with httpx.AsyncClient() as client:
-        response = await client.get(URL)
-        return response.text
+    try:
+        async with httpx.AsyncClient() as client:
+            response = await client.get(URL)
+            return { "status": response.status_code }
+    except:
+        return { "status": 503 }

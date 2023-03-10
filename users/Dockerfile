@@ -10,6 +10,3 @@ COPY ./users /code/users
 
 CMD ["uvicorn", "users.main:app", "--host", "0.0.0.0", "--port", "8000"]
 
-# docker build -t user_image . -f users/Dockerfile 
-# docker run --name my_user_container -p 8000:8000 user_image
-# docker rm my_user_container  

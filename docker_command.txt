@@ -1,0 +1,14 @@
+Docker Network
+docker network create sample-app
+
+Ping container
+docker rm my_ping_container
+docker build -t ping_image . -f ping/Dockerfile 
+docker run --name my_ping_container --network sample-app -p 8080:8080 ping_image
+
+
+User container
+docker rm my_user_container
+docker build -t user_image . -f users/Dockerfile 
+docker run --name my_user_container --network sample-app -p 8000:8000 user_image
+ 
