@@ -11,7 +11,7 @@ class Order(BaseModel):
 app = FastAPI()
 
 # since both containers are part of same network
-URL = "http://my_user_container:8000/health"
+URL = "http://user_container:8000/health"
 
 @app.get("/")
 async def root():

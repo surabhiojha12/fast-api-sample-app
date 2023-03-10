@@ -1,0 +1,13 @@
+# docker-compose gives us default network
+version: "3.8"
+services:
+  user_container:
+    build: ./users
+    ports:
+      - '8000:8000' 
+  ping_container:
+    build: ./ping
+    ports:
+      - '8080:8080'
+    depends_on:
+      - user_container

@@ -7,7 +7,7 @@ COPY ./requirements.txt /code/requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 RUN pip3 install httpx
 
-COPY ./ping /code/ping
+COPY . /code/ping
 
 CMD ["uvicorn", "ping.main:app", "--host", "0.0.0.0", "--port", "8080"]
 
