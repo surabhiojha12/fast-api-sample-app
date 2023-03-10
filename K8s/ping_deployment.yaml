@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ping-server
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      component: ping
+  template:
+    metadata:
+      labels:
+        component: ping
+    spec:
+      containers:
+        - name: ping-container
+          image: surabhiojha12/ping_image
+          env:
+            - name: PING_URL
+              value: "http://user-service:8000/health"     

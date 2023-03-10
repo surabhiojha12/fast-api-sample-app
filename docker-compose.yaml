@@ -24,6 +24,8 @@ services:
       - db_container
   ping_container:
     build: ./ping
+    environment:
+      PING_URL: "http://user_container:8000/health"
     ports:
       - '8080:8080'
     depends_on:

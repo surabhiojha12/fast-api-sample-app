@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import httpx
 import asyncio
+import os
 
 class Order(BaseModel):
     id: int
@@ -11,7 +12,7 @@ class Order(BaseModel):
 app = FastAPI()
 
 # since both containers are part of same network
-URL = "http://user_container:8000/health"
+URL = os.environ.get('PING_URL')
 
 @app.get("/")
 async def root():

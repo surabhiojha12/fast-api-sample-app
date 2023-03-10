@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-server
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      component: user
+  template:
+    metadata:
+      labels:
+        component: user
+    spec:
+      containers:
+        - name: user-container
+          image: surabhiojha12/user_image
+          env:
+            - name: DATABASE_URL
+              value: postgresql://postgres:secret@postgres-cluster-ip-service:5432/postgres
