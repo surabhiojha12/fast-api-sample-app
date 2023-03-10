@@ -1,13 +1,19 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+import os
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
-# SQLALCHEMY_DATABASE_URL = "postgresql://user:password@postgresserver/db"
+# Database configurations
 
-engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
-)
+# _user = os.environ.get('PGUSER')
+# _password = os.environ.get('PGPASSWORD')
+# _host = os.environ.get('PGHOST')
+# _database = os.environ.get('PGDATABASE')
+# _port = os.environ.get('PGPORT')
+
+SQLALCHEMY_DATABASE_URL = os.environ.get('DATABASE_URL')
+
+engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()

@@ -1,13 +1,33 @@
 # docker-compose gives us default network
 version: "3.8"
 services:
+  db_container:
+    image: 'postgres:latest'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_USER: postgres
+      POSTGRES_DB: store
   user_container:
     build: ./users
     ports:
-      - '8000:8000' 
+      - '8000:8000'
+    environment:
+      DATABASE_URL: postgresql://postgres:secret@db_container:5432/store
+      # PGUSER: postgres
+      # PGPASSWORD: secret
+      # PGHOST: db_container
+      # PGDATABASE: store
+      # PGPORT: '5432'
+    depends_on:
+      - db_container
   ping_container:
     build: ./ping
     ports:
       - '8080:8080'
     depends_on:
       - user_container
+
+volumes:
+    postgres_data:

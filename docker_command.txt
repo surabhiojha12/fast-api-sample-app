@@ -13,6 +13,6 @@ docker build -t user_image . -f users/Dockerfile
 docker run --name user_container --network sample-app -p 8000:8000 user_image
  
   curl -H 'Content-Type: application/json' \
-      -d '{ "title":"foo","body":"bar", "id": 1, "name": "Sam", "ph_no": "1232123123"}' \
+      -d '{ "name": "Sam", "ph_no": "1232123123"}' \
       -X POST \
       http://0.0.0.0:8000/users
