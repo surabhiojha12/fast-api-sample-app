@@ -1,3 +1,4 @@
+Local files
 kubectl apply -f=database-persistent-volume-claim.yaml
 kubectl apply -f=ping_deployment.yaml
 kubectl apply -f=ping_service.yaml
@@ -6,14 +7,32 @@ kubectl apply -f=postgres_service.yaml
 kubectl apply -f=user_service.yaml
 kubectl apply -f=user_deployment.yaml
 
+Prod-files
+kubectl apply -f=database-persistent-volume-claim.yaml
+kubectl apply -f=ping_deployment_eks.yaml
+kubectl apply -f=ping_service_load_balancer.yaml
+kubectl apply -f=postgres_deployment.yaml
+kubectl apply -f=postgres_service.yaml
+kubectl apply -f=user_service_load_balancer.yaml
+kubectl apply -f=user_deployment.yaml
+
+
+Local delete
 kubectl delete deployment ping-server
 kubectl delete deployment postgres-deployment
 kubectl delete deployment user-server
-
 kubectl delete service ping-service 
 kubectl delete service postgres-cluster-ip-service
 kubectl delete service user-service
+kubectl delete PersistentVolumeClaim database-persistent-volume-claim
 
+Prod Delete
+kubectl delete deployment ping-server
+kubectl delete deployment postgres-deployment
+kubectl delete deployment user-server
+kubectl delete service postgres-cluster-ip-service
+kubectl delete service ping-service-loadbalancer
+kubectl delete service user-service-loadbalancer
 kubectl delete PersistentVolumeClaim database-persistent-volume-claim
 
   curl -H 'Content-Type: application/json' \
